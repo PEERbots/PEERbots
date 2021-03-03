@@ -5,7 +5,7 @@
 *Are you interested in social robots? Do you have two Android devices laying around? Do love cute little robot faces? <br/>
 **Then this is the software for you!***
 
-![Face with Romibo Eyes](/Images/FaceTrack.gif) <br/>
+![Face with Romibo Eyes](Images/FaceTrack.gif) <br/>
 *Robot face with simple webcam face tracking enabled.*
 
 ## Summary <br/>
