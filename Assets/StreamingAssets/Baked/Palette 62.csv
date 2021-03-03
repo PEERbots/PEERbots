@@ -1,0 +1,5 @@
+title,color,agentID,speech,voice,volume,rate,pitch,animation,animationSpeed,gaze,gazeX,gazeY,gazeZ,gazeDuration,emotion,emotionDuration,BVHname,BVHspeed,blendshapeName,blendshapeSpeed,blendshapeFramerate,WAVname,WAVvolume,WAVrate,WAVpitch
+Button672,0,0,,,1,1,1,,1,,0,0,0,3,,1,record01.bvh,1,,1,15,,1,1,1
+Button974,0,0,,,1,1,1,,1,,0,0,0,3,,1,record02.bvh,1,,1,15,,1,1,1
+Button537,0,0,,,1,1,1,,1,,0,0,0,3,,1,record03.bvh,1,,1,15,,1,1,1
+Button785,0,0,,,1,1,1,,1,,0,0,0,3,,1,record4.bvh,1,,1,15,,1,1,1
