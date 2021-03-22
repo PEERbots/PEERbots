@@ -1,0 +1,9 @@
+0. This app stores user-generated files called "palettes", which is essentially a collection of buttons that control social robot properties such as speech, color, and emotion and more. These files can be shared via email at the user's discretion. Users have full ownership of their own custom user-generated files.
+
+1. There is no content in our app that could be seen by children that is inappropriate for them in the default palettes, although users are not prohibited fro creating such inappropriate content. Users assume all liability for misuse of this app.
+
+2. This app does not contains ads.
+
+3. This app has the ability remotely control a social robot via the internet, which can use microphone audio at the users option. Microphone audio is only used with the user's permission to control another social robot. No audio data is stored, saved, or collected by this app.
+
+4. Our app complies with all applicable laws and regulations relating to children, such as the US Children's Online Privacy Protection Act COPPA, and the EU General Data Protection Regulation GDPR.
