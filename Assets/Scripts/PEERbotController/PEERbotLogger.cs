@@ -100,14 +100,14 @@ public class PEERbotLogger : MonoBehaviour {
     public void startLogging() { 
         if(isLogging) { stopLogging(); }
         isLogging = true;
-        activeLabel?.SetActive(true);
+        if(activeLabel != null) { activeLabel.SetActive(true); }
         log = new List<PEERbotButtonDataFull>();
     }
     public void stopLogging() {
         if(isLogging) {
             SaveLog("[LOG] " + sessionID + ((sessionID.Length>0)?" ":"") + System.DateTime.Now.ToString("yyyy-MM-dd hh-mm-sstt") + ".csv");
             isLogging = false;
-            activeLabel?.SetActive(false);
+            if(activeLabel != null) { activeLabel.SetActive(false); }
         } else {
             Debug.Log("Log not started, cannot save log.");
         }
