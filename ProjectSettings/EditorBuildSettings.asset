@@ -6,27 +6,33 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/[Deprecated]/Waseda Controller WebRTC.unity
-    guid: 35d688869a1b64240947bea8e3c3a527
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Scenes/PEERbots WebGL/WebGL FAM Scene Selector.unity
-    guid: 8a77d94b2bf4e3449b14b105968d0548
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Scenes/PEERbots WebGL/WebGL FAM Controller.unity
-    guid: ae0cf588db72a824b83470ec031f03b9
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Scenes/PEERbots WebGL/WebGL FAM Face.unity
-    guid: 2808783a008bf1349813fa137adfbc4d
-  - enabled: 1
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
     path: Assets/Scenes/Native FAM Scene Selector.unity
     guid: 4dbab4299e467e24e90d5a42c7caca46
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Native FAM Controller.unity
     guid: 9ff161030e810664e8c15f96d8eac664
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Native FAM Face.unity
     guid: 6a04950b08f9cb9489f25c07735b6a02
-  - enabled: 0
-    path: Assets/Scenes/Waseda/Waseda Controller Mocap.unity
-    guid: 3a509e59f02a78d49ae0e5a9a5334846
+  - enabled: 1
+    path: Assets/Scenes/PEERbots Scene Selector.unity
+    guid: c705e186a11201140a6ff2b015d71294
+  - enabled: 1
+    path: Assets/Scenes/PEERbots Controller.unity
+    guid: 101cc9c0a79d49c4ebc211884b5d3be9
+  - enabled: 1
+    path: Assets/Scenes/PEERbots Face.unity
+    guid: 5a53133d420b90b4ebcf2a6b14633507
   m_configObjects: {}
