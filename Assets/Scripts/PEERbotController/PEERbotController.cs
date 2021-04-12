@@ -48,7 +48,7 @@ public class PEERbotController : MonoBehaviour {
     newPaletteObject.transform.localScale = new Vector3(1,1,1);
     newPaletteObject.SetActive(true);
     //Change color to denote default streaming asset
-    if(streamingAsset) { newPaletteObject.GetComponent<Image>().color = new Color32(168, 255, 168, 255); }
+    if(streamingAsset) { newPaletteObject.transform.Find("TitleText").GetComponent<Text>().color = new Color32(150, 80, 220, 255); }
     //Palette vars
     PEERbotPalette newPalette = newPaletteObject.GetComponent<PEERbotPalette>();
     if(newPalette == null) { Debug.LogError("Palette script on PaletteCopy not found. PaletteCopy must have Palette script attached!"); return null; }
