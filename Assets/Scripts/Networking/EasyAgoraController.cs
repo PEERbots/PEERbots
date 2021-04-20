@@ -322,6 +322,7 @@ public class EasyAgoraController : MonoBehaviour {
     }
     // implement engine callbacks
     private void onJoinChannelSuccess(string channelName, uint uid, int elapsed) {
+        if(playerCount == 0) { playerCount++; }
         Debug.Log("JoinChannelSuccessHandler: uid = " + uid);
     }
     // When a remote user joined, this delegate will be called. 
