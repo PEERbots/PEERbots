@@ -25425,11 +25425,12 @@ MonoBehaviour:
   UID: 0
   playerCount: 0
   playerNumber: 0
-  maxPlayerCount: 1
+  maxPlayerCount: 3
   timeout: 900
   timeoutTimer: -10
   useAudio: 0
   useVideo: 0
+  hostOrClientMode: 2
   muteLocalAudio: 1
   muteLocalVideo: 1
   localVolume: 0

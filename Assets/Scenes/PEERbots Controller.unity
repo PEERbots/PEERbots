@@ -5735,8 +5735,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 688439440}
   m_HandleRect: {fileID: 688439439}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 0.99999994
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -26607,7 +26607,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1546099126}
   m_HandleRect: {fileID: 1546099125}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -27169,7 +27169,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1754241837}
   m_HandleRect: {fileID: 1754241836}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -30877,10 +30877,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AppID: d9b0a89c8ccd4b9480ae991e43374fd1
+  streamID: 0
+  UID: 0
+  playerCount: 0
+  playerNumber: 0
+  maxPlayerCount: 3
   timeout: 900
   timeoutTimer: -10
   useAudio: 0
   useVideo: 0
+  hostOrClientMode: 1
   muteLocalAudio: 1
   muteLocalVideo: 1
   localVolume: 0
