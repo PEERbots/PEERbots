@@ -192,8 +192,8 @@ public class EasyAgoraController : MonoBehaviour {
         if (mRtcEngine != null) { IRtcEngine.Destroy(); mRtcEngine = null; }
     }
     //Called to join or leave a session. Engine must be loaded first!
-    public void join(string channel) { 
-        
+    public void join(string channel) {         
+        if(String.IsNullOrEmpty(channel)) { Debug.LogWarning("Empty channel name. Ignoring join request."); return; }
         
         loadEngine(AppID); // load engine
 
@@ -358,7 +358,7 @@ public class EasyAgoraController : MonoBehaviour {
             Debug.LogWarning("No host found. Cannot join.");
             leave();    
         }
-        
+
         //Check if host only
         if(hostOrClientMode == HostOrClientMode.HOST && playerNumber > 1) {
             Debug.LogWarning("Host already found. Cannot have two hosts.");
