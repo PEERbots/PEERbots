@@ -5583,8 +5583,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 688439440}
   m_HandleRect: {fileID: 688439439}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 0.99999994
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -16296,7 +16296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_color1: {r: 1, g: 1, b: 1, a: 1}
-  m_color2: {r: 0.81960785, g: 0.81960785, b: 0.81960785, a: 0.8235294}
+  m_color2: {r: 0.8039216, g: 0.8039216, b: 0.8039216, a: 0.8235294}
   m_angle: -30
   m_ignoreRatio: 1
 --- !u!114 &1262696284
@@ -17825,47 +17825,51 @@ MonoBehaviour:
   - name: Light Blue
     color:
       serializedVersion: 2
-      rgba: 4294967040
+      rgba: 4294829466
   - name: Blue
     color:
       serializedVersion: 2
-      rgba: 4294901760
+      rgba: 4292646477
   - name: Green
     color:
       serializedVersion: 2
-      rgba: 4278255360
+      rgba: 4285909553
   - name: Red
     color:
       serializedVersion: 2
-      rgba: 4278190335
+      rgba: 4286282486
   - name: Purple
     color:
       serializedVersion: 2
-      rgba: 4294901880
+      rgba: 4294608287
   - name: Pink
     color:
       serializedVersion: 2
-      rgba: 4294927359
+      rgba: 4293435640
   - name: Yellow
     color:
       serializedVersion: 2
-      rgba: 4278255615
+      rgba: 4289326586
   - name: Orange
     color:
       serializedVersion: 2
-      rgba: 4278222847
+      rgba: 4285309681
   - name: Grey
     color:
       serializedVersion: 2
-      rgba: 4288059030
+      rgba: 4291743438
   - name: Black
     color:
       serializedVersion: 2
-      rgba: 4281479730
+      rgba: 4283256141
   - name: White
     color:
       serializedVersion: 2
       rgba: 4294967295
+  - name: Turquoise
+    color:
+      serializedVersion: 2
+      rgba: 4291284295
   goals:
   - goal: None
     subgoals:
@@ -26320,7 +26324,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1546099126}
   m_HandleRect: {fileID: 1546099125}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -26882,7 +26886,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1754241837}
   m_HandleRect: {fileID: 1754241836}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
