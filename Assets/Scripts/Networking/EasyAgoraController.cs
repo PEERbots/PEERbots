@@ -17,6 +17,9 @@ using agora_utilities;
 using Assets.SimpleEncryption;
 
 //Full Agora IO docs here: https://docs.agora.io/en/Video/API%20Reference/unity/index.html
+
+public enum HostOrClientMode { BOTH, HOST, CLIENT }
+
 public class EasyAgoraController : MonoBehaviour {
 
     [Header("Agora Settings")]
@@ -37,6 +40,9 @@ public class EasyAgoraController : MonoBehaviour {
     
     public bool useAudio = true;
     public bool useVideo = true;
+
+    public HostOrClientMode hostOrClientMode;
+
 
     [Header("Local Video / Audio")]
     public bool muteLocalAudio = false;
@@ -332,17 +338,14 @@ public class EasyAgoraController : MonoBehaviour {
     protected virtual void OnDataReceived(string message) { 
         onDataReceived?.Invoke(message);
     }
-    //Channel stats handler (every two seconds)
+    //Channel stats handler (updated every two seconds)
     private void onRtcStats(RtcStats stats) {
-        
+        //Get the current player count
         playerCount = (int)stats.userCount;
 
-        if(playerNumber == 0) {
-            playerNumber = 1000;    
-        }
-        if(playerCount < playerNumber) {
-            playerNumber = playerCount;
-        }
+        //Player number readjusts according to last player joined/quit
+        if(playerNumber == 0) { playerNumber = 1000; }
+        if(playerCount < playerNumber) { playerNumber = playerCount; }
 
         //Kick the last player that joined if max player count reached.
         if(playerNumber > maxPlayerCount) {
@@ -350,6 +353,18 @@ public class EasyAgoraController : MonoBehaviour {
             leave();
         }
         
+        //Check if client only
+        if(hostOrClientMode == HostOrClientMode.CLIENT && playerCount == 1) {
+            Debug.LogWarning("No host found. Cannot join.");
+            leave();    
+        }
+        
+        //Check if host only
+        if(hostOrClientMode == HostOrClientMode.HOST && playerNumber > 1) {
+            Debug.LogWarning("Host already found. Cannot have two hosts.");
+            leave();    
+        }
+
     }
     // when this user joins
     private void onJoinChannelSuccess(string channelName, uint uid, int elapsed) {
