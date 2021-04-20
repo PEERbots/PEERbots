@@ -25,14 +25,13 @@ public class EasyAgoraController : MonoBehaviour {
     [Header("Agora Settings")]
     [SerializeField] private string AppID = "your_appid"; // PLEASE KEEP THIS App ID IN SAFE PLACE. Get your own App ID at https://dashboard.agora.io/
     private IRtcEngine mRtcEngine; // instance of agora engine
+    public HostOrClientMode hostOrClientMode;
+
     public int streamID;
-
     public int UID = 0;
-
-    public int playerCount = 0;
     public int playerNumber = 0;
+    public int playerCount = 0;
     public int maxPlayerCount = 3;
-
     public event Action<string> onDataReceived;
     
     public float timeout = -1; //set this to -1 if not in use. Resets upon joining, activity.
@@ -40,8 +39,6 @@ public class EasyAgoraController : MonoBehaviour {
     
     public bool useAudio = true;
     public bool useVideo = true;
-
-    public HostOrClientMode hostOrClientMode;
 
 
     [Header("Local Video / Audio")]
@@ -353,22 +350,20 @@ public class EasyAgoraController : MonoBehaviour {
             leave();
         }
         
-        //Check if client only
+        //Check if client only (kick if trying to host)
         if(hostOrClientMode == HostOrClientMode.CLIENT && playerCount == 1) {
             Debug.LogWarning("No host found. Cannot join.");
             leave();    
         }
 
-        //Check if host only
+        //Check if host only (kick if not hosting)
         if(hostOrClientMode == HostOrClientMode.HOST && playerNumber > 1) {
             Debug.LogWarning("Host already found. Cannot have two hosts.");
             leave();    
         }
-
     }
     // when this user joins
     private void onJoinChannelSuccess(string channelName, uint uid, int elapsed) {
-        //if(playerCount == 0) { playerCount++; }
         Debug.Log("JoinChannelSuccessHandler: uid = " + uid);
     }
     // when this user leaves
@@ -377,19 +372,13 @@ public class EasyAgoraController : MonoBehaviour {
     }
     // When a remote user joined, this delegate will be called. 
     private void onUserJoined(uint uid, int elapsed) { 
-        //playerCount++;
-        Debug.Log("Player " + playerCount + " onUserJoined: uid = " + uid + " elapsed = " + elapsed);
-        
-        
+        Debug.Log("onUserJoined: uid = " + uid + " elapsed = " + elapsed);        
         if(activeLabel) { activeLabel.SetActive(true); }
         showRemoteVideo(uid);
     }
     // When remote user is offline, this delegate will be called. Delete user video object
     private void onUserOffline(uint uid, USER_OFFLINE_REASON reason) {
         Debug.Log("onUserOffline: uid = " + uid + " reason = " + reason);
-
-        //playerCount--;
-
         if(activeLabel) { activeLabel.SetActive(false); } 
         clearRemoteVideo();
     }
