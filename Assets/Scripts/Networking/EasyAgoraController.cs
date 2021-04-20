@@ -22,6 +22,9 @@ public class EasyAgoraController : MonoBehaviour {
     [SerializeField] private string AppID = "your_appid"; // PLEASE KEEP THIS App ID IN SAFE PLACE. Get your own App ID at https://dashboard.agora.io/
     private IRtcEngine mRtcEngine; // instance of agora engine
     int streamID;
+    int UID = 0;
+    int playerCount = 0;
+    int maxPlayerCount = 3;
 
     public event Action<string> onDataReceived;
     
@@ -242,7 +245,7 @@ public class EasyAgoraController : MonoBehaviour {
         } else { mRtcEngine.DisableVideo(); } // disable video in general   
 
         //Join Channel
-        mRtcEngine.JoinChannel(channel, null, 0); // join channel
+        UID = mRtcEngine.JoinChannel(channel, null, 0); // join channel
         
         // Optional: if a data stream is required, here is a good place to create it. 
         streamID = mRtcEngine.CreateDataStream(true, true);
@@ -323,13 +326,24 @@ public class EasyAgoraController : MonoBehaviour {
     }
     // When a remote user joined, this delegate will be called. 
     private void onUserJoined(uint uid, int elapsed) { 
-        Debug.Log("onUserJoined: uid = " + uid + " elapsed = " + elapsed);
+        playerCount++;
+        Debug.Log("Player " + playerCount + " onUserJoined: uid = " + uid + " elapsed = " + elapsed);
+        
+        //Kick the last player that joined if max player count reached.
+        if(uid == UID && playerCount > maxPlayerCount) {
+            Debug.LogWarning("MaxPlayerCount reached. Kicking last player that joined.");
+            leave();
+        }
+        
         if(activeLabel) { activeLabel.SetActive(true); }
         showRemoteVideo(uid);
     }
     // When remote user is offline, this delegate will be called. Delete user video object
     private void onUserOffline(uint uid, USER_OFFLINE_REASON reason) {
         Debug.Log("onUserOffline: uid = " + uid + " reason = " + reason);
+
+        playerCount--;
+
         if(activeLabel) { activeLabel.SetActive(false); } 
         clearRemoteVideo();
     }
