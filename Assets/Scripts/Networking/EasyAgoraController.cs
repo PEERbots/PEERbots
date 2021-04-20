@@ -47,16 +47,13 @@ public class EasyAgoraController : MonoBehaviour {
     public GameObject remoteVideoObject;
     public bool isRemoteVideo3D = false;
 
-    [Header("Roomname / Password")]
+    [Header("Roomname")]
     public string roomname = "";
-    public string password = "";
     private const string saltKey = "FmvKWp4N-XpP*Xm&";
 
     public string roomnamePref = "roomname";
-    public string passwordPref = "password";
-
+    
     public InputField roomnameField;
-    public InputField passwordField;
     public InputField messageField;
 
     public GameObject leaveButton;
@@ -76,10 +73,6 @@ public class EasyAgoraController : MonoBehaviour {
             roomname = PlayerPrefs.GetString(roomnamePref, "");
             roomnameField.text = roomname;
         }
-        if(passwordField != null) { 
-            password = PlayerPrefs.GetString(passwordPref, ""); 
-            passwordField.text = password;
-        }
         if(activeLabel) { activeLabel.SetActive(false); }
     }
     void OnApplicationQuit() { leave(); }
@@ -96,11 +89,22 @@ public class EasyAgoraController : MonoBehaviour {
     //------------------------------------------------------//
     //---------------UNITY UI BUTTON COMMANDS---------------//
     //------------------------------------------------------//
-    private string Encrypt(string text) { return AES.Encrypt(text, password+saltKey); }
-    private string Decrypt(string text) { return AES.Decrypt(text, password+saltKey); }
+    private string Encrypt(string text) { return AES.Encrypt(text, saltKey); }
+    private string Decrypt(string text) { return AES.Decrypt(text, saltKey); }
 
-    public void setRoomname(string text) { roomname = text; PlayerPrefs.SetString(roomnamePref, roomname); }
-    public void setPassword(string text) { password = text; PlayerPrefs.SetString(passwordPref, password); }
+    public void setRoomname(string text) { 
+        roomname = text; PlayerPrefs.SetString(roomnamePref, roomname); 
+        roomnameField.text = roomname;
+    }
+    public void generateRoomname() { setRoomname(GenerateRandomAlphaNumericString(6)); }
+
+    public static string GenerateRandomAlphaNumericString(int length = 6) {
+        const string src = "abcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder sb = new StringBuilder();
+        System.Random RNG = new System.Random();
+        for (int i = 0; i < length; i++) { char c = src[RNG.Next(0, src.Length)]; sb.Append(c); }
+        return sb.ToString();
+    }
 
     public void onJoinButtonClicked() { join(Encrypt(roomname)); }
 
