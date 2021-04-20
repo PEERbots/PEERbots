@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Collections;
 using System.Collections.Generic;
 
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -21,10 +22,13 @@ public class EasyAgoraController : MonoBehaviour {
     [Header("Agora Settings")]
     [SerializeField] private string AppID = "your_appid"; // PLEASE KEEP THIS App ID IN SAFE PLACE. Get your own App ID at https://dashboard.agora.io/
     private IRtcEngine mRtcEngine; // instance of agora engine
-    int streamID;
-    int UID = 0;
-    int playerCount = 0;
-    int maxPlayerCount = 3;
+    public int streamID;
+
+    public int UID = 0;
+
+    public int playerCount = 0;
+
+    public int maxPlayerCount = 3;
 
     public event Action<string> onDataReceived;
     
