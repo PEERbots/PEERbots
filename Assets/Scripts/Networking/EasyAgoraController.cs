@@ -27,7 +27,7 @@ public class EasyAgoraController : MonoBehaviour {
     public int UID = 0;
 
     public int playerCount = 0;
-
+    public int playerNumber = 0;
     public int maxPlayerCount = 3;
 
     public event Action<string> onDataReceived;
@@ -279,6 +279,7 @@ public class EasyAgoraController : MonoBehaviour {
         clearRemoteVideo();
 
         playerCount = 0; 
+        playerNumber = 0;
 
         //Hide Leave Button and Show Join button if assigned
         joinButton.SetActive(true);
@@ -336,8 +337,15 @@ public class EasyAgoraController : MonoBehaviour {
         
         playerCount = (int)stats.userCount;
 
+        if(playerNumber == 0) {
+            playerNumber = 1000;    
+        }
+        if(playerCount < playerNumber) {
+            playerNumber = playerCount;
+        }
+
         //Kick the last player that joined if max player count reached.
-        if(stats.userCount == maxPlayerCount) {
+        if(playerNumber > maxPlayerCount) {
             Debug.LogWarning("MaxPlayerCount reached. Kicking last player that joined.");
             leave();
         }
