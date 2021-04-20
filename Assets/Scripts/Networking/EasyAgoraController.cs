@@ -186,17 +186,22 @@ public class EasyAgoraController : MonoBehaviour {
         if (mRtcEngine != null) { IRtcEngine.Destroy(); mRtcEngine = null; }
     }
     //Called to join or leave a session. Engine must be loaded first!
-    public void join(string channel) { loadEngine(AppID); // load engine
+    public void join(string channel) { 
+        
+        
+        loadEngine(AppID); // load engine
 
         if (mRtcEngine == null) { return; }
         Debug.Log("calling join (channel = " + channel + ")");
         
         // set callbacks (optional)
         mRtcEngine.OnJoinChannelSuccess = onJoinChannelSuccess;
+        mRtcEngine.OnLeaveChannel = onLeaveChannel;
         mRtcEngine.OnUserJoined = onUserJoined;
         mRtcEngine.OnUserOffline = onUserOffline;
         mRtcEngine.OnStreamMessage = onStreamMessage;
-        
+        mRtcEngine.OnRtcStats = onRtcStats;
+
         //set timeout timer (optional)
         if(timeout > 0) { timeoutTimer = timeout; if(timedOutLabel) { timedOutLabel.SetActive(false); } }
 
@@ -273,6 +278,8 @@ public class EasyAgoraController : MonoBehaviour {
         clearLocalVideo();
         clearRemoteVideo();
 
+        playerCount = 0; 
+
         //Hide Leave Button and Show Join button if assigned
         joinButton.SetActive(true);
         leaveButton.SetActive(false);
@@ -324,21 +331,32 @@ public class EasyAgoraController : MonoBehaviour {
     protected virtual void OnDataReceived(string message) { 
         onDataReceived?.Invoke(message);
     }
-    // implement engine callbacks
-    private void onJoinChannelSuccess(string channelName, uint uid, int elapsed) {
-        if(playerCount == 0) { playerCount++; }
-        Debug.Log("JoinChannelSuccessHandler: uid = " + uid);
-    }
-    // When a remote user joined, this delegate will be called. 
-    private void onUserJoined(uint uid, int elapsed) { 
-        playerCount++;
-        Debug.Log("Player " + playerCount + " onUserJoined: uid = " + uid + " elapsed = " + elapsed);
+    //Channel stats handler (every two seconds)
+    private void onRtcStats(RtcStats stats) {
         
+        playerCount = (int)stats.userCount;
+
         //Kick the last player that joined if max player count reached.
-        if(uid == UID && playerCount > maxPlayerCount) {
+        if(stats.userCount == maxPlayerCount) {
             Debug.LogWarning("MaxPlayerCount reached. Kicking last player that joined.");
             leave();
         }
+        
+    }
+    // when this user joins
+    private void onJoinChannelSuccess(string channelName, uint uid, int elapsed) {
+        //if(playerCount == 0) { playerCount++; }
+        Debug.Log("JoinChannelSuccessHandler: uid = " + uid);
+    }
+    // when this user leaves
+    private void onLeaveChannel(RtcStats stats) {
+        Debug.Log("LeaveChannel.");
+    }
+    // When a remote user joined, this delegate will be called. 
+    private void onUserJoined(uint uid, int elapsed) { 
+        //playerCount++;
+        Debug.Log("Player " + playerCount + " onUserJoined: uid = " + uid + " elapsed = " + elapsed);
+        
         
         if(activeLabel) { activeLabel.SetActive(true); }
         showRemoteVideo(uid);
@@ -347,7 +365,7 @@ public class EasyAgoraController : MonoBehaviour {
     private void onUserOffline(uint uid, USER_OFFLINE_REASON reason) {
         Debug.Log("onUserOffline: uid = " + uid + " reason = " + reason);
 
-        playerCount--;
+        //playerCount--;
 
         if(activeLabel) { activeLabel.SetActive(false); } 
         clearRemoteVideo();
