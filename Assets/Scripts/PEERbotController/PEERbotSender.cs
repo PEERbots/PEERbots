@@ -129,15 +129,15 @@ public class PEERbotSender : MonoBehaviour {
         }                
     }
     //Quick Speech
-    public void setQuickSpeech(string text) { if(!string.IsNullOrEmpty(text)) { quickSpeech = text; } }
-    public void sendQuickSpeech(string text) { if(!string.IsNullOrEmpty(text)) { setQuickSpeech(text); sendQuickSpeech();  } }
+    public void setQuickSpeech(string text) { 
+        if(!string.IsNullOrEmpty(text)) { quickSpeech = text; } 
+    }
     public void sendQuickSpeech() {
         if(string.IsNullOrEmpty(quickSpeech)) { return; }
         PEERbotButtonDataFull data = new PEERbotButtonDataFull();        
         data.title = "Quick Speech";
         //Speech vars
-        if(useLocalTTS) { sayTTS(quickSpeech); } 
-        else  { data.speech = quickSpeech; }
+        data.speech = quickSpeech; 
         data.volume = editorUI.volumeSlider.value;
         data.rate = editorUI.volumeSlider.value;
         data.pitch = editorUI.volumeSlider.value;
