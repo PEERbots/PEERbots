@@ -9,7 +9,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public enum SendMode { NONE, HTTP, MISTY, UDP, BLUETOOTH, AGORA, WEBRTC, SERIAL };
+//public enum SendMode { NONE, HTTP, MISTY, UDP, BLUETOOTH, AGORA, WEBRTC, SERIAL };
+public enum SendMode { NONE, HTTP, MISTY, AGORA };
     
 public class PEERbotSender : MonoBehaviour {
 
@@ -58,11 +59,11 @@ public class PEERbotSender : MonoBehaviour {
         PlayerPrefs.SetInt("SendMode", mode);
 
         //Bluetooth specific
-        bluetoothPanel.SetActive(sendMode == SendMode.BLUETOOTH);
+        //bluetoothPanel.SetActive(sendMode == SendMode.BLUETOOTH);
         
         //UDP Specific
-        udpPanel.SetActive(sendMode == SendMode.UDP);
-        if(sendMode != SendMode.UDP) { udpSender.stopSenderThread(); }
+        //udpPanel.SetActive(sendMode == SendMode.UDP);
+        //if(sendMode != SendMode.UDP) { udpSender.stopSenderThread(); }
         
         //Agora Specific
         agoraPanel.SetActive(sendMode == SendMode.AGORA); 
@@ -72,7 +73,7 @@ public class PEERbotSender : MonoBehaviour {
         mistyPanel.SetActive(sendMode == SendMode.MISTY);
         
         //Misty or UDP
-        ipPanel.SetActive(sendMode == SendMode.UDP || sendMode == SendMode.MISTY || sendMode == SendMode.HTTP);
+        ipPanel.SetActive(/*sendMode == SendMode.UDP ||*/ sendMode == SendMode.MISTY || sendMode == SendMode.HTTP);
     }
     public void initSendMode() { 
         if(sendModeDropdown) { 
@@ -175,7 +176,7 @@ public class PEERbotSender : MonoBehaviour {
             case SendMode.AGORA: sendAgoraMessage(data); break;
             case SendMode.MISTY: sendMistyMessage(data); break;
             case SendMode.HTTP: sendHTTPMessage(data); break;
-            case SendMode.UDP: sendUDPMessage(data); break;
+            //case SendMode.UDP: sendUDPMessage(data); break;
         }
     }
     //UDP / HTTP / Bluetooth / WebRTC / Agora Messages
@@ -198,7 +199,7 @@ public class PEERbotSender : MonoBehaviour {
             case SendMode.AGORA: sendAgoraBlink(); break;
             case SendMode.MISTY: sendMistyBlink(); break;
             case SendMode.HTTP: sendHTTPBlink(); break;
-            case SendMode.UDP: sendUDPBlink(); break;
+            //case SendMode.UDP: sendUDPBlink(); break;
         }        
     }
     public void sendUDPBlink() { udpSender?.sendMessage("blink"); }

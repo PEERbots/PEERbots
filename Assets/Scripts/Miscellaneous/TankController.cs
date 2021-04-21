@@ -97,10 +97,10 @@ public class TankController : MonoBehaviour {
   public void setSendMode(int mode) {
     switch(mode) {
       case 0: sendMode = SendMode.NONE; break;
-      case 1: sendMode = SendMode.UDP; break;
+      //case 1: sendMode = SendMode.UDP; break;
       case 2: sendMode = SendMode.MISTY; break;
-      case 3: sendMode = SendMode.BLUETOOTH; break;
-      case 4: sendMode = SendMode.SERIAL; if(serialPortObject) { serialPortObject.SetActive(true); } break;
+      //case 3: sendMode = SendMode.BLUETOOTH; break;
+      //case 4: sendMode = SendMode.SERIAL; if(serialPortObject) { serialPortObject.SetActive(true); } break;
       default: sendMode = SendMode.NONE; break;
     }
   }
