@@ -70,7 +70,9 @@ public class EasyAgoraController : MonoBehaviour {
     public GameObject joinButton;
     
     public GameObject activeLabel;
-    public GameObject timedOutLabel;
+
+    public GameObject warningLabel;
+    public Text warningLabelText;
 
     private string streamMessage = "";
 
@@ -90,11 +92,17 @@ public class EasyAgoraController : MonoBehaviour {
     void Update() { 
         if(timeoutTimer > 0) { timeoutTimer -= Time.deltaTime; } 
         else if(timeoutTimer > -1) { timeoutTimer = -10;
-            if(timedOutLabel) { timedOutLabel.SetActive(true); }
             if(activeLabel) { activeLabel.SetActive(false); }
+            showWarningLabel("Agora Connection Timed Out! Please Rejoin.");
             leave();
         }
     }
+
+    public void showWarningLabel(string warning)  { Debug.LogWarning(warning);
+        if(warningLabelText) { warningLabelText.text = warning; }
+        warningLabel?.SetActive(true);
+    }
+    public void hideWarningLabel() { warningLabel?.SetActive(false); }
 
     //------------------------------------------------------//
     //---------------UNITY UI BUTTON COMMANDS---------------//
@@ -206,7 +214,7 @@ public class EasyAgoraController : MonoBehaviour {
         mRtcEngine.OnRtcStats = onRtcStats;
 
         //set timeout timer (optional)
-        if(timeout > 0) { timeoutTimer = timeout; if(timedOutLabel) { timedOutLabel.SetActive(false); } }
+        if(timeout > 0) { timeoutTimer = timeout; hideWarningLabel(); }
 
         //Audio settings
         if(useAudio) {
@@ -269,6 +277,9 @@ public class EasyAgoraController : MonoBehaviour {
         //Hide Join Button and Show Leave button if assigned
         joinButton.SetActive(false);
         leaveButton.SetActive(true);
+
+        //Hide warning label if still there
+        hideWarningLabel();
     }
     public void leave() { if (mRtcEngine == null) { return; }
         Debug.Log("calling leave");
@@ -308,7 +319,7 @@ public class EasyAgoraController : MonoBehaviour {
             Debug.Log("Attempting to send stream message: " + text);
             mRtcEngine.SendStreamMessage(streamID, text);    
             //set timeout timer (optional)
-            if(timeout > 0) { timeoutTimer = timeout; if(timedOutLabel) { timedOutLabel.SetActive(false); } }
+            if(timeout > 0) { timeoutTimer = timeout; if(warningLabel) { warningLabel.SetActive(false); } }
         }
     }
     public string getMessage() {
@@ -330,7 +341,7 @@ public class EasyAgoraController : MonoBehaviour {
         streamMessage = data;
         OnDataReceived(data);
         //set timeout timer (optional)
-        if(timeout > 0) { timeoutTimer = timeout; if(timedOutLabel) { timedOutLabel.SetActive(false); } }
+        if(timeout > 0) { timeoutTimer = timeout; }
     }
     protected virtual void OnDataReceived(string message) { 
         onDataReceived?.Invoke(message);
@@ -346,19 +357,19 @@ public class EasyAgoraController : MonoBehaviour {
 
         //Kick the last player that joined if max player count reached.
         if(playerNumber > maxPlayerCount) {
-            Debug.LogWarning("MaxPlayerCount reached. Kicking last player that joined.");
+            showWarningLabel("MaxPlayerCount reached. Kicking last player that joined."); 
             leave();
         }
         
         //Check if client only (kick if trying to host)
         if(hostOrClientMode == HostOrClientMode.CLIENT && playerCount == 1) {
-            Debug.LogWarning("No host found. Cannot join.");
+            showWarningLabel("No host found. Please try another room name."); 
             leave();    
         }
 
         //Check if host only (kick if not hosting)
         if(hostOrClientMode == HostOrClientMode.HOST && playerNumber > 1) {
-            Debug.LogWarning("Host already found. Cannot have two hosts.");
+            showWarningLabel("Room already exists. Please change room name."); 
             leave();    
         }
     }
