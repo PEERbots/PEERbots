@@ -172,9 +172,9 @@ PlayerSettings:
     Standalone: peerbots.app.desktop
     iPhone: com.FrozenMist.ExhibitionPackT001
   buildNumber: {}
-  AndroidBundleVersionCode: 5
+  AndroidBundleVersionCode: 6
   AndroidMinSdkVersion: 22
-  AndroidTargetSdkVersion: 29
+  AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 0
   aotOptions: 
   stripEngineCode: 1
