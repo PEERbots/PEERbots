@@ -20,6 +20,7 @@ public class PEERbotLogger : MonoBehaviour {
     
     [Header("Logging")]    
     public List<PEERbotButtonDataFull> log;
+    public List<PEERbotPaletteLogData> paletteLog;
     public GameObject activeLabel;
 
     public string sessionID = "";
@@ -77,6 +78,11 @@ public class PEERbotLogger : MonoBehaviour {
     public void AddToLog() { AddToLog(pc.currentPalette, pc.currentButton.data); }
     public void AddToLog(PEERbotPalette palette, PEERbotButtonDataFull data) { 
         if(!isLogging) { return; }
+        if (palette == null || data ==  null) 
+        {
+            Debug.LogWarning("Palette or button is null! Cannot add to Log!");
+            return;
+        }
         data.palette = palette.title;
         data.date = System.DateTime.Now.ToString("yyyy-MM-dd");
         data.time = System.DateTime.Now.ToString("hh:mm:sstt ") + timezone;
@@ -84,6 +90,21 @@ public class PEERbotLogger : MonoBehaviour {
         //Add to master log file
         List<PEERbotButtonDataFull> single = new List<PEERbotButtonDataFull>(); single.Add(data);
         Sinbad.CsvUtil.SaveObjects(single, logPath + SLASH + "[LOG] MasterLog.csv", true);
+    }
+
+
+    public void AddToPaletteLog() { AddToPaletteLog(pc.currentPalette); }
+    public void AddToPaletteLog(PEERbotPalette palette){
+        if (palette == null)
+        {
+            Debug.LogWarning("Palette is null! Cannot add to PaletteLog!");
+            return;
+        }
+        PEERbotPaletteLogData data = new PEERbotPaletteLogData();
+        data.title = palette.title;
+        data.date = System.DateTime.Now.ToString("yyyy-MM-dd");
+        data.time = System.DateTime.Now.ToString("hh:mm:sstt ") + timezone;
+        paletteLog.Add(data);
     }
     
     public void SaveLog(string logName) {
@@ -97,6 +118,20 @@ public class PEERbotLogger : MonoBehaviour {
         Sinbad.CsvUtil.SaveObjects(log, logPath + SLASH + logName, true);
         Debug.Log("Log saved at " + logPath + SLASH + logName);
     }    
+
+    public void SavePaletteLog(string logName) {
+        //Check and make sure path and path are not null.
+        if(paletteLog == null) { Debug.LogWarning("Log is null! Cannot save log."); return; }
+        if(paletteLog.Count == 0) { Debug.LogWarning("Log is empty! Cannot save log."); return; }
+        //Make sure path and name is not null or empty.
+        if(string.IsNullOrEmpty(logPath)) { Debug.LogWarning("logPath is null or empty! Cannot save log."); return; }
+        if(string.IsNullOrEmpty(logName)) { Debug.LogWarning("logName is null or empty! Cannot save log."); return; }
+        //Save using sinban CSV auto json parser
+        Sinbad.CsvUtil.SaveObjects(paletteLog, logPath + SLASH + logName, true);
+        Debug.Log("Log saved at " + logPath + SLASH + logName);
+    }    
+
+
     public void startLogging() { 
         if(isLogging) { stopLogging(); }
         isLogging = true;
@@ -106,6 +141,7 @@ public class PEERbotLogger : MonoBehaviour {
     public void stopLogging() {
         if(isLogging) {
             SaveLog("[LOG] " + sessionID + ((sessionID.Length>0)?" ":"") + System.DateTime.Now.ToString("yyyy-MM-dd hh-mm-sstt") + ".csv");
+            SavePaletteLog("[PaletteLOG] " + sessionID + ((sessionID.Length>0)?" ":"") + System.DateTime.Now.ToString("yyyy-MM-dd hh-mm-sstt") + ".csv");
             isLogging = false;
             if(activeLabel != null) { activeLabel.SetActive(false); }
         } else {
