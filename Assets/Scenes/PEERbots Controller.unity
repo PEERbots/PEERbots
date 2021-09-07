@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -325,6 +325,7 @@ MonoBehaviour:
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
+  m_ShouldActivateOnSelect: 1
 --- !u!114 &13026264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -661,6 +662,7 @@ MonoBehaviour:
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
+  m_ShouldActivateOnSelect: 1
 --- !u!224 &30706297
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5626,6 +5628,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1586682629}
+        m_MethodName: AddToPaletteLog
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &408573594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8433,6 +8446,7 @@ MonoBehaviour:
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
+  m_ShouldActivateOnSelect: 1
 --- !u!114 &601177023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13897,6 +13911,7 @@ MonoBehaviour:
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
+  m_ShouldActivateOnSelect: 1
 --- !u!114 &1014833093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15385,7 +15400,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 371777663}
   m_HandleRect: {fileID: 371777662}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -21748,7 +21763,7 @@ GameObject:
   - component: {fileID: 1586682629}
   m_Layer: 0
   m_Name: Logger
-  m_TagString: Untagged
+  m_TagString: PEERbotLogger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21781,6 +21796,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pc: {fileID: 1134234873}
   log: []
+  paletteLog: []
   activeLabel: {fileID: 0}
   sessionID: 
   autoStartLogging: 1
@@ -27072,7 +27088,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1546099126}
   m_HandleRect: {fileID: 1546099125}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -28507,6 +28523,7 @@ MonoBehaviour:
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
+  m_ShouldActivateOnSelect: 1
 --- !u!224 &2041951674
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30278,6 +30295,7 @@ MonoBehaviour:
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
+  m_ShouldActivateOnSelect: 1
 --- !u!114 &3514754817989501087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31107,6 +31125,7 @@ MonoBehaviour:
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 1
+  m_ShouldActivateOnSelect: 1
 --- !u!224 &4330537942973051001
 RectTransform:
   m_ObjectHideFlags: 0

@@ -3,9 +3,8 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SFB;
 using SimpleFileBrowser;
-
+using SFB;
 // Uses the following file pickers:
 // 1. Runtime File Browser: https://assetstore.unity.com/packages/tools/integration/native-file-picker-for-android-ios-173238
 // 2. Native File Picker: https://assetstore.unity.com/packages/tools/gui/runtime-file-browser-113006
