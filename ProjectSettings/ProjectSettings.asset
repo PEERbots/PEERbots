@@ -247,7 +247,7 @@ PlayerSettings:
   clonedFromGUID: b4f01eefb2792447aacd2cc780dbef3c
   templatePackageId: 
   templateDefaultScene: 
-  AndroidTargetArchitectures: 3
+  AndroidTargetArchitectures: 1
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
   AndroidKeystoreName: D:/Documents/GitHub/peerbots.keystore
@@ -676,7 +676,7 @@ PlayerSettings:
     30: CT_RTV
   platformArchitecture: {}
   scriptingBackend:
-    Android: 1
+    Android: 0
   il2cppCompilerConfiguration: {}
   managedStrippingLevel: {}
   incrementalIl2cppBuild: {}

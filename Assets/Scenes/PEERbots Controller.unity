@@ -5919,7 +5919,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 688439440}
   m_HandleRect: {fileID: 688439439}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -7371,9 +7371,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 500190394}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53a925e6d1c00154aaf5655324807a11, type: 3}
+  m_Script: {fileID: 11500000, guid: 30fc0cf27223a80408ebe82915f481e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sendMode: 0
+  joystick: {fileID: 1690056445}
+  rightRotateButton: {fileID: 1741832494}
+  leftRotateButton: {fileID: 1864099533}
+  joystickUI: {fileID: 1690056444}
+  serialPortObject: {fileID: 0}
+  udpSender: {fileID: 0}
+  misty: {fileID: 2127215557}
+  remoteReceiveTimer: 0
+  remoteReceiveTime: 1
+  remoteX: 0
+  remoteY: 0
+  serialTimer: 2
+  serialTime: 0.3
+  maxSpeed: 60
+  maxSpeedSlider: {fileID: 490137524}
 --- !u!1 &504395327
 GameObject:
   m_ObjectHideFlags: 0
@@ -9003,7 +9019,6 @@ Transform:
   - {fileID: 1693383149}
   - {fileID: 4593429384647512}
   - {fileID: 1502681138}
-  - {fileID: 1775816769}
   - {fileID: 4330537943800888485}
   - {fileID: 1134234874}
   m_Father: {fileID: 0}
@@ -15571,7 +15586,7 @@ Transform:
   - {fileID: 1586682628}
   - {fileID: 1957249799}
   m_Father: {fileID: 628439311}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1142892853
 GameObject:
@@ -20175,7 +20190,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1502681138
 Transform:
   m_ObjectHideFlags: 0
@@ -22930,6 +22945,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1686789828}
   m_CullTransparentMesh: 0
+--- !u!1 &1690056444 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1531213445540486, guid: e0815e227ed46e445b99930271e8942c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1896902569}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1690056445 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114282555968907678, guid: e0815e227ed46e445b99930271e8942c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1896902569}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690056444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d42b387efc83be49900b546e4052e28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1693383148
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24134,49 +24167,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1771541023}
   m_CullTransparentMesh: 0
---- !u!1 &1775816768
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1775816769}
-  - component: {fileID: 1775816770}
-  m_Layer: 0
-  m_Name: BluetoothSender
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1775816769
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1775816768}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 628439311}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1775816770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1775816768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7936e0ff96fd8204da2262c53deb9d08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1776440003
 GameObject:
   m_ObjectHideFlags: 0
@@ -27394,7 +27384,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1775816770}
+      - m_Target: {fileID: 0}
         m_MethodName: showBluetoothDevices
         m_Mode: 1
         m_Arguments:
@@ -31413,7 +31403,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 628439311}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4330537943800888486
 GameObject:
