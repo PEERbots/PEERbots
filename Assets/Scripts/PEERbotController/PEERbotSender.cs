@@ -162,7 +162,7 @@ public class PEERbotSender : MonoBehaviour {
 
     //---SEND MESSAGE---//
     public void sendMessage() { 
-        //Try to send the current button if exist
+        //Try to the current button if exist
         if(pc.currentButton != null) { sendMessage(pc.currentButton); } 
         //Otherwise just send whatever is in the UI
         //else { sendQuickSpeech(editorUI.speechField.text); }

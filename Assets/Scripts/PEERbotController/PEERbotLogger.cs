@@ -21,6 +21,7 @@ public class PEERbotLogger : MonoBehaviour {
     [Header("Logging")]    
     public List<PEERbotButtonDataFull> log;
     public List<PEERbotPaletteLogData> paletteLog;
+    public List<PEERbotButtonQuickSpeechData> quickSpeechLog;
     public GameObject activeLabel;
 
     public string sessionID = "";
@@ -84,13 +85,31 @@ public class PEERbotLogger : MonoBehaviour {
             Debug.LogWarning("Palette or button is null! Cannot add to Log!");
             return;
         }
+
         data.palette = palette.title;
         data.date = System.DateTime.Now.ToString("yyyy-MM-dd");
         data.time = System.DateTime.Now.ToString("hh:mm:sstt ") + timezone;
-        log.Add(data);
-        //Add to master log file
-        List<PEERbotButtonDataFull> single = new List<PEERbotButtonDataFull>(); single.Add(data);
-        Sinbad.CsvUtil.SaveObjects(single, logPath + SLASH + "[LOG] MasterLog.csv", true);
+
+        //Check if quick speech
+        if (data.title == "Quick Speech")
+        {
+            PEERbotButtonQuickSpeechData logged = new PEERbotButtonQuickSpeechData();
+            logged.logType = "Quick Speech";
+            logged.speech = data.speech;
+            logged.palette = data.palette;
+            logged.date = data.date;
+            logged.time = data.time;
+            quickSpeechLog.Add(logged);
+            /********************
+            //TODO: Figure out master log
+            ********************/
+        }
+        else {  
+            log.Add(data);
+            //Add to master log file
+            List<PEERbotButtonDataFull> single = new List<PEERbotButtonDataFull>(); single.Add(data);
+            Sinbad.CsvUtil.SaveObjects(single, logPath + SLASH + "[LOG] MasterLog.csv", true);
+        }
     }
 
     
@@ -114,11 +133,10 @@ public class PEERbotLogger : MonoBehaviour {
         Sinbad.CsvUtil.SaveObjects(single, logPath + SLASH + "[LOG] MasterLog.csv", true);
         */
     }
-    
     public void SaveLog(string logName) {
         //Check and make sure path and path are not null.
-        if(log == null) { Debug.LogWarning("Log is null! Cannot save log."); return; }
-        if(log.Count == 0) { Debug.LogWarning("Log is empty! Cannot save log."); return; }
+        if(log == null) { Debug.LogWarning("Button Log is null! Cannot save log."); return; }
+        if(log.Count == 0) { Debug.LogWarning("Button Log is empty! Cannot save log."); return; }
         //Make sure path and name is not null or empty.
         if(string.IsNullOrEmpty(logPath)) { Debug.LogWarning("logPath is null or empty! Cannot save log."); return; }
         if(string.IsNullOrEmpty(logName)) { Debug.LogWarning("logName is null or empty! Cannot save log."); return; }
@@ -129,8 +147,8 @@ public class PEERbotLogger : MonoBehaviour {
 
     public void SavePaletteLog(string logName) {
         //Check and make sure path and path are not null.
-        if(paletteLog == null) { Debug.LogWarning("Log is null! Cannot save log."); return; }
-        if(paletteLog.Count == 0) { Debug.LogWarning("Log is empty! Cannot save log."); return; }
+        if(paletteLog == null) { Debug.LogWarning("Palette Log is null! Cannot save log."); return; }
+        if(paletteLog.Count == 0) { Debug.LogWarning("Palette Log is empty! Cannot save log."); return; }
         //Make sure path and name is not null or empty.
         if(string.IsNullOrEmpty(logPath)) { Debug.LogWarning("logPath is null or empty! Cannot save log."); return; }
         if(string.IsNullOrEmpty(logName)) { Debug.LogWarning("logName is null or empty! Cannot save log."); return; }
@@ -138,6 +156,18 @@ public class PEERbotLogger : MonoBehaviour {
         Sinbad.CsvUtil.SaveObjects(paletteLog, logPath + SLASH + logName, true);
         Debug.Log("Log saved at " + logPath + SLASH + logName);
     }    
+
+    public void SaveQuickSpeechLog(string logName) {
+        //Check and make sure path and path are not null.
+        if(quickSpeechLog == null) { Debug.LogWarning("Quick Speech Log is null! Cannot save log."); return; }
+        if(quickSpeechLog.Count == 0) { Debug.LogWarning("Quick Speech Log is empty! Cannot save log."); return; }
+        //Make sure path and name is not null or empty.
+        if(string.IsNullOrEmpty(logPath)) { Debug.LogWarning("logPath is null or empty! Cannot save log."); return; }
+        if(string.IsNullOrEmpty(logName)) { Debug.LogWarning("logName is null or empty! Cannot save log."); return; }
+        //Save using sinban CSV auto json parser
+        Sinbad.CsvUtil.SaveObjects(quickSpeechLog, logPath + SLASH + logName, true);
+        Debug.Log("Log saved at " + logPath + SLASH + logName);
+    }
 
 
     public void startLogging() { 
@@ -150,6 +180,7 @@ public class PEERbotLogger : MonoBehaviour {
         if(isLogging) {
             SaveLog("[LOG] " + sessionID + ((sessionID.Length>0)?" ":"") + System.DateTime.Now.ToString("yyyy-MM-dd hh-mm-sstt") + ".csv");
             SavePaletteLog("[PaletteLOG] " + sessionID + ((sessionID.Length>0)?" ":"") + System.DateTime.Now.ToString("yyyy-MM-dd hh-mm-sstt") + ".csv");
+            SaveQuickSpeechLog("[QuickSpeechLOG] " + sessionID + ((sessionID.Length>0)?" ":"") + System.DateTime.Now.ToString("yyyy-MM-dd hh-mm-sstt") + ".csv");
             isLogging = false;
             if(activeLabel != null) { activeLabel.SetActive(false); }
         } else {

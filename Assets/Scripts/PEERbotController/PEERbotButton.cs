@@ -58,3 +58,12 @@ public class PEERbotButtonData { //Simplified data is used only for saving/loadi
   public string subgoal = "";
   public string proficiency = "";
 }
+
+[System.Serializable]
+public class PEERbotButtonQuickSpeechData {
+  public string logType = "";
+  public string speech = "";
+  public string palette = "";
+  public string date = "";
+  public string time = "";
+}
