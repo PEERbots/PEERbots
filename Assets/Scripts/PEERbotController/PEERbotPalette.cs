@@ -6,7 +6,6 @@ using UnityEngine.UI;
 [System.Serializable]
 public class PEERbotPalette : MonoBehaviour {
 
-  
   public string title = "";
   
   public List<PEERbotButton> buttons;
@@ -43,7 +42,9 @@ public class PEERbotPaletteData {
 [System.Serializable]
 public class PEERbotPaletteLogData
 {
-  public string title = "";
+  public const string logType = "changePalette";
+  public string newValue = "";
+  public string previousValue = "";
   public string date;
   public string time;
 }

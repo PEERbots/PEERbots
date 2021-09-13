@@ -27,6 +27,7 @@ public class PEERbotLogger : MonoBehaviour {
     private string timezone = "";
     private bool isLogging = false;
     public bool autoStartLogging = true;
+    public static string lastPalette = "Initial Palette";
 
     void Awake() {
         //Get local timezone
@@ -92,7 +93,7 @@ public class PEERbotLogger : MonoBehaviour {
         Sinbad.CsvUtil.SaveObjects(single, logPath + SLASH + "[LOG] MasterLog.csv", true);
     }
 
-
+    
     public void AddToPaletteLog() { AddToPaletteLog(pc.currentPalette); }
     public void AddToPaletteLog(PEERbotPalette palette){
         if (palette == null)
@@ -101,10 +102,17 @@ public class PEERbotLogger : MonoBehaviour {
             return;
         }
         PEERbotPaletteLogData data = new PEERbotPaletteLogData();
-        data.title = palette.title;
+        data.newValue = palette.title;
         data.date = System.DateTime.Now.ToString("yyyy-MM-dd");
         data.time = System.DateTime.Now.ToString("hh:mm:sstt ") + timezone;
+        data.previousValue = lastPalette;
         paletteLog.Add(data);
+        lastPalette = palette.title;
+        /*
+        //Add to master log file
+        List<PEERbotPaletteLogData> single = new List<PEERbotPaletteLogData>(); single.Add(data);
+        Sinbad.CsvUtil.SaveObjects(single, logPath + SLASH + "[LOG] MasterLog.csv", true);
+        */
     }
     
     public void SaveLog(string logName) {
