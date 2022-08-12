@@ -51,11 +51,14 @@ public class PEERbotButtonEditorUI : MonoBehaviour {
         if(!buttonColor)      { Debug.LogWarning("buttonColor is null!"); }
 
         //Hide/Show OS specific buttons
-        exportLogButton.SetActive(Application.platform == RuntimePlatform.Android ||
-                                  Application.platform == RuntimePlatform.IPhonePlayer);
-        sharePaletteButton.SetActive(Application.platform == RuntimePlatform.Android ||
-                                     Application.platform == RuntimePlatform.IPhonePlayer);
-                                     
+        if(exportLogButton) {
+            exportLogButton.SetActive(Application.platform == RuntimePlatform.Android ||
+                                      Application.platform == RuntimePlatform.IPhonePlayer);
+        }
+        if(sharePaletteButton) {
+            sharePaletteButton.SetActive(Application.platform == RuntimePlatform.Android ||
+                                         Application.platform == RuntimePlatform.IPhonePlayer);
+        }                    
         //Init Dropdowns
         initColorDropdown();
         initEmotionDropdown();
@@ -106,7 +109,7 @@ public class PEERbotButtonEditorUI : MonoBehaviour {
         switchSubgoalDropdown(0,0);
     }
     //Switch Subgoals
-    public void switchSubgoalDropdown() { if(pc.currentButton == null) { Debug.LogWarning("No button selected! Cannot set button subgoal."); }
+    public void switchSubgoalDropdown() { if(pc.currentButton == null) { Debug.LogWarning("No button selected! Cannot set button subgoal."); return; }
         int subgoalIndex = getButtonSubgoalIndex(buttonGoal.value, pc.currentButton.data.subgoal);
         switchSubgoalDropdown(buttonGoal.value, subgoalIndex);
     }
@@ -255,6 +258,7 @@ public class PEERbotButtonEditorUI : MonoBehaviour {
         }
     }
     public void setButtonGoal(int index) { if(!pc.currentButton) { Debug.LogWarning("No button selected! Cannot set goal."); return; }        
+        if(!(0 <= index && index < mappings.goals.Count)) { Debug.LogWarning("Bad goal mapping index [" + index + "]. Ignoring setButtonGoal request."); return; }
         pc.currentButton.data.goal = mappings.goals[index].goal; 
         buttonGoal.value = index;
     }

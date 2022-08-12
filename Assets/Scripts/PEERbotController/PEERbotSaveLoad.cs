@@ -245,13 +245,13 @@ public class PEERbotSaveLoad : MonoBehaviour {
     }
     //Simple File Browser Load Settings
     public void MobileFileBrowserLoadPalette() {
-        androidSaveLoadBackground.SetActive(true);
+        androidSaveLoadBackground?.SetActive(true);
         StartCoroutine( MobileFileBrowserLoadCoroutinePalette(pc.newPalette()) );
     }
     IEnumerator MobileFileBrowserLoadCoroutinePalette(PEERbotPalette palette) {
         SimpleFileBrowser.FileBrowser.SetDefaultFilter( ".csv" );
         yield return SimpleFileBrowser.FileBrowser.WaitForLoadDialog(FileBrowser.PickMode.Files, false, getPalettePathFolder(), null, "Load CSV Palette File", "Load" );
-        androidSaveLoadBackground.SetActive(false);
+        androidSaveLoadBackground?.SetActive(false);
         if(FileBrowser.Success) { //Try to load if successful
             //Because F%^$ing Android refuses to keep file IO simple, with their F!@# stupid SAF system
             string filepath = FileBrowserHelpers.GetDirectoryName(FileBrowser.Result[0]);
@@ -375,13 +375,13 @@ public class PEERbotSaveLoad : MonoBehaviour {
     //Simple File Browser Save Settings
     public void MobileFileBrowserSavePalette() {
         if(pc.currentPalette == null) { Debug.LogWarning("No Palette selected! Cannot save."); return; }        
-        androidSaveLoadBackground.SetActive(true);
+        androidSaveLoadBackground?.SetActive(true);
         StartCoroutine( MobileFileBrowserSaveCoroutinePalette(pc.currentPalette) );
     }
     IEnumerator MobileFileBrowserSaveCoroutinePalette(PEERbotPalette palette) {
         SimpleFileBrowser.FileBrowser.SetDefaultFilter( ".csv" );
         yield return SimpleFileBrowser.FileBrowser.WaitForSaveDialog(FileBrowser.PickMode.Files, false, getPalettePathFolder(), palette.title, "Save CSV Palette File", "Save" );
-        androidSaveLoadBackground.SetActive(false);
+        androidSaveLoadBackground?.SetActive(false);
         if(SimpleFileBrowser.FileBrowser.Success) { SaveCSVPalette(palette, SimpleFileBrowser.FileBrowser.Result[0]); }
     }
     //Standalone File Browser Save Settings
@@ -426,12 +426,12 @@ public class PEERbotSaveLoad : MonoBehaviour {
     }
     //Simple File Browser Home Path Settings
     public void MobileFileBrowserSetHome() {
-        androidSaveLoadBackground.SetActive(true);
+        androidSaveLoadBackground?.SetActive(true);
         StartCoroutine( _MobileFileBrowserSetHome() );
     }
     IEnumerator _MobileFileBrowserSetHome() {
         yield return SimpleFileBrowser.FileBrowser.WaitForLoadDialog(FileBrowser.PickMode.Folders, true, getPalettePathFolder(), null, "Set Home Path Folder", "Load" );
-        androidSaveLoadBackground.SetActive(false);
+        androidSaveLoadBackground?.SetActive(false);
         if(SimpleFileBrowser.FileBrowser.Success) { 
             //Because F%^$ing Android refuses to keep file IO simple, with their F!@# stupid SAF system
             string realpath = FileBrowserHelpers.GetDirectoryName(SimpleFileBrowser.FileBrowser.Result[0] + SLASH + "idontexist.csv");

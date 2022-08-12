@@ -98,7 +98,7 @@ public class PEERbotSender : MonoBehaviour {
         misty.sendOnAudio = !isOn;
     }
     public void SetMistyTTS(bool isOn) { useMistyTTS = isOn;
-        mistyTTSToggle.isOn  = isOn; PlayerPrefs.SetInt("MistyTTS", isOn?1:0);
+        if(mistyTTSToggle) { mistyTTSToggle.isOn  = isOn; } PlayerPrefs.SetInt("MistyTTS", isOn?1:0);
     }
     //Say TTS locally
     public void sayTTS() { sayTTS(editorUI.speechField.text); }
