@@ -187,10 +187,11 @@ public class PEERbotSender : MonoBehaviour {
     public void sendMistyMessage(PEERbotButtonDataFull data) { 
         misty.ChangeLED(data.r, data.g, data.b);
         misty.MoveHead(misty.headPitch + UnityEngine.Random.Range(-5,5), misty.headRoll + UnityEngine.Random.Range(-5,5), misty.headYaw + UnityEngine.Random.Range(-5,5));
-        misty.MoveArms(UnityEngine.Random.Range(-90,90),UnityEngine.Random.Range(-90,90)); 
+	misty.MoveArms(UnityEngine.Random.Range(-90,90),UnityEngine.Random.Range(-90,90)); 
         misty.SetDefaultVolume((int)(data.volume*100f));
         misty.ChangeImage(mappings.emotions[mappings.getEmotionIndexFromString(data.emotion)].mistyEmotion);
         if(!useLocalTTS) { sayMistyTTS(); }
+	misty.MoveHead(-10, 0, 0);
     }
 
     //---SEND BLINK---//
