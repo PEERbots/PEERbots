@@ -184,6 +184,7 @@ public class PEERbotSender : MonoBehaviour {
     private void sendAgoraMessage(PEERbotButtonDataFull data) { agora?.sendMessage(JsonUtility.ToJson(data)); }
     private void sendHTTPMessage(PEERbotButtonDataFull data) { httpSender?.SendBehaviour(data); }
     //Misty Messages
+    public void returnMistyHeadNeutral() { misty.MoveHead(-10, 0, 0); }
     public void sendMistyMessage(PEERbotButtonDataFull data) { 
         misty.ChangeLED(data.r, data.g, data.b);
         misty.MoveHead(misty.headPitch + UnityEngine.Random.Range(-5,5), misty.headRoll + UnityEngine.Random.Range(-5,5), misty.headYaw + UnityEngine.Random.Range(-5,5));
@@ -191,7 +192,7 @@ public class PEERbotSender : MonoBehaviour {
         misty.SetDefaultVolume((int)(data.volume*100f));
         misty.ChangeImage(mappings.emotions[mappings.getEmotionIndexFromString(data.emotion)].mistyEmotion);
         if(!useLocalTTS) { sayMistyTTS(); }
-	misty.MoveHead(-10, 0, 0);
+	Invoke("returnMistyHeadNeutral",2.0f);
     }
 
     //---SEND BLINK---//
